@@ -11,7 +11,12 @@ const registrar = async (req, res) => {
     if (!name || !email || !password) {
         return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
     }
-
+    if (!validarSenha(password)) {
+        return res.status(400).json({ message: 'A senha deve ter no mínimo 8 caracteres e conter pelo menos um número.' });
+    }
+    if (!emailConfirm.test(email)) {
+        return res.status(400).json({ message: 'Email inválido.' });
+    }
     const usuarioRegistrado = await Usuario.findOne({ email});
     if (usuarioRegistrado) {
         return res.status(400).json({ message: 'Email já cadastrado.' });
@@ -21,9 +26,6 @@ const registrar = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
 
-    if (!emailConfirm.test(email)) {
-        return res.status(400).json({ message: 'Email inválido.' });
-    }
 
     try {
         const usuario = new Usuario({
@@ -64,4 +66,9 @@ const login = async (req, res) => {
 export default {
     registrar,
     login,
+}
+
+function validarSenha(password) {
+    const regex = /^(?=.*\d).{8,}$/;
+    return regex.test(password);
 }
