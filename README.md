@@ -1,4 +1,4 @@
 # express-backend
 
-[![Watch the video](https://img.youtube.com/vi/poNwo7HU_MM/maxresdefault.jpg)](https://www.youtube.com/watch?v=poNwo7HU_MM)
+[![Watch the video](https://img.youtube.com/vi/n6yjidDFZc8/maxresdefault.jpg)](https://youtu.be/n6yjidDFZc8)
 
